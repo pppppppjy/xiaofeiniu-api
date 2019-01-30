@@ -1,5 +1,5 @@
 /**
- * 全局设置
+ * 全局设置路由器
  */
 const express = require('express');
 const pool = require('../../pool');
@@ -7,41 +7,28 @@ var router = express.Router();
 module.exports = router;
 /**
  * GET /admin/settings
- * 获取全部全局设置
- * API:
+ * 获取所有的全局设置
+ * 返回数据:
+ * { appName:'xx',adminUrl:"xx",appUrl:'xx',..}
  */
-
+router.get('/',(req,res)=>{
+   pool.query('SELECT * FROM xfn_settings LIMIT 1',(err,result)=>{
+       if(err) throw err;
+       res.send(result[0]);
+   })
+})
  /**
   * PUT /admin/settings
-  * 修改全局设置
+  * 请求数据:
+  * 修改所有全局设置信息
+  * 返回数据:
+  * {code:200,msg:'settings updated succ'}
   */
-
-  /**
-   * GET /admin/table
-   * 获取所有的桌台信息
-   */
-
-   /**
-    * GET /admin/table/reservation/:tid
-    * 获取预约状态桌台的详情
-    */
-
-    /**
-     * GET /admin/table/inuse/:tid
-     * 获取占用状态桌台的详情
-     */
-
-     /**
-      * PATCH /admin/table
-      * 修改桌台的状态
-      */
-
-      /**
-       * POST /admin/table
-       * 添加桌台
-       */
-
-       /**
-        * POST /admin/table
-        * 删除桌台
-        */
+router.put('/',(req,res)=>{
+    pool.query('UPDATE xfn_settings SET ?',req.body,(err,result)=>{
+        if(err) throw err;
+        res.send({code:200,msg:'settings updated succ'});  
+    })
+})
+ 
+  
