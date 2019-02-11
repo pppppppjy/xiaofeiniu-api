@@ -6,7 +6,7 @@ console.log("准备启动API服务器...");
 console.log(new Date().toLocaleString());
 
 //引入端口,可随时改变
-const PORT = 8090;
+const PORT = 5050;
 //引入express模块
 const express = require('express');
 //引入跨域模块
@@ -48,3 +48,5 @@ app.use('/admin/dish',dishRouter);
 app.use('/admin/settings',settingsRouter);
 app.use('/admin/table',tableRouter);
 
+//挂载顾客App必需的路由器
+//app.use('/dish',dishRouter);
